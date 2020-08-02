@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/victo/CLionProjects/tesst/library/Models.h
+
+C:/Users/victo/CLionProjects/tesst/library/Tienda.h
+stdio.h
+-
+getopt.h
+-
+Models.h
+C:/Users/victo/CLionProjects/tesst/library/Models.h
+
+C:/Users/victo/CLionProjects/tesst/main.c
+stdio.h
+-
+windows.h
+-
+library/Tienda.h
+C:/Users/victo/CLionProjects/tesst/library/Tienda.h
+

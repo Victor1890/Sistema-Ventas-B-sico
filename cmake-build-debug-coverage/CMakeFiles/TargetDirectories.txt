@@ -1,0 +1,3 @@
+C:/Users/victo/CLionProjects/tesst/cmake-build-debug-coverage/CMakeFiles/tesst.dir
+C:/Users/victo/CLionProjects/tesst/cmake-build-debug-coverage/CMakeFiles/edit_cache.dir
+C:/Users/victo/CLionProjects/tesst/cmake-build-debug-coverage/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,3 @@
+C:/Users/victo/CLionProjects/tesst/cmake-build-debug/CMakeFiles/tesst.dir
+C:/Users/victo/CLionProjects/tesst/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/victo/CLionProjects/tesst/cmake-build-debug/CMakeFiles/rebuild_cache.dir
