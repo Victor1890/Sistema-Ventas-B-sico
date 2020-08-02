@@ -12,14 +12,12 @@ struct Libros
     int cantidad_items;
 };
 
-typedef struct Libros _Libros[10];
-
 void AgregarLibros();
-void Usuario(_Libros *libros);
+void Usuario(struct Libros *libros);
 char AreYouTeacher();
-//void Pedidos(_Libros *libro);
-void List_Products(_Libros *libros, int n);
-void Roles_menu(_Libros *libros);
+//void Pedidos(struct Libros *libro);
+void List_Products(struct Libros *libros, int n);
+void Roles_menu(struct Libros *libros);
 
 char AreYouTeacher()
 {
@@ -38,20 +36,22 @@ char AreYouTeacher()
 
 void AgregarLibros()
 {
-    _Libros libros;
+    struct Libros *libros;
     int cantidad;
     system("cls");
     printf("\n\nAgregar producto\n\n");
     printf("Cantidad de producto que deseas agregar?: \t"); scanf("%d", &cantidad);
+
+    libros = (struct Libros *)malloc(cantidad * sizeof(struct Libros *));
 
     fflush(stdin);
 
     for(int i = 0; i < cantidad; i++)
     {
         system("cls");
-        libros[i].id = i;
-        printf("Agregar el nombre del libro: \t"); scanf("%[^\n]", &libros[i].nombre_libros);
-        printf("Agregar la cantidad de libros que 'habra' disponible: \t"); scanf("%d", &libros[i].cantidad_items);
+        libros->id = i;
+        printf("Agregar el nombre del libro: \t"); scanf("%[^\n]", &(libros+i)->nombre_libros);
+        printf("Agregar la cantidad de libros que 'habra' disponible: \t"); scanf("%d", &(libros+i)->cantidad_items);
         fflush(stdin);
     }
     fflush(stdin);
@@ -61,7 +61,7 @@ void AgregarLibros()
     Roles_menu(libros);
 }
 
-void Usuario(_Libros *libros)
+void Usuario(struct Libros *libros)
 {
     int matricula;
     char respuesta;
@@ -77,41 +77,42 @@ void Usuario(_Libros *libros)
     {
         printf("\n\nDeseas ver la lista de los libros disponible (escribir 'Y' para un si o 'N' para un no): \t"); scanf("%s", &respuesta);
         printf("\n\nMostrando una lista de %d elementos\n", 3);
+        getchar();
         if(respuesta == 'y')
             List_Products(libros,3);
     }
 }
 
-void List_Products(_Libros *libros, int n)
+void List_Products(struct Libros *libros, int n)
 {
     system("cls");
     printf("\n\nLista de los Libros\n");
     printf("\n\nID || Nombre || Disponibilidad \n");
     for(int i = 0; i < n; i++)
     {
-        printf("\n\n%d || %s || %d \n", (libros[i]->id + 1), libros[i]->nombre_libros, libros[i]->cantidad_items);
+        printf("\n\n%d || %s || %d \n", ((libros+i)->id + 1), (libros+i)->nombre_libros, (libros+i)->cantidad_items);
     }
 }
 
-//void Pedidos(_Libros *libro)
-//{
-//    int buscar, retiro;
-//    char respuesta;
-//    printf("\n\nQue libro deseas adquirir:\t"); scanf("%d", &buscar);
-//
-//    if(buscar == (libro->id + 1))
-//    {
-//        printf("\n\nUsted ha seleccionado '%s' ", libro->nombre_libros);
-//        printf("Deseas arquirir el '%s' (escribir 'Y' para un si o 'N' para un no):", libro->nombre_libros); scanf("%s", &respuesta);
-//        if(respuesta == 'y')
-//        {
-//            printf("Cuantos deseas retirar: \t"); scanf("%d", &retiro);
-//            libro->cantidad_items = libro->cantidad_items - retiro;
-//            List_Products(libro);
-//        }
-//    }
-//    else if(buscar > (libro->id + 1))
-//        printf("\n\nEl libro aun no se ha agregado :(\n\n");
-//    else if(buscar < (libro->id + 1))
-//        printf("\n\nEl libro no existe :()\n\n");
-//}
+void Pedidos(struct Libros *libro)
+{
+    int buscar, retiro;
+    char respuesta;
+    printf("\n\nQue libro deseas adquirir:\t"); scanf("%d", &buscar);
+
+    if(buscar == (libro->id + 1))
+    {
+        printf("\n\nUsted ha seleccionado '%s' ", libro->nombre_libros);
+        printf("Deseas arquirir el '%s' (escribir 'Y' para un si o 'N' para un no):", libro->nombre_libros); scanf("%s", &respuesta);
+        if(respuesta == 'y')
+        {
+            printf("Cuantos deseas retirar: \t"); scanf("%d", &retiro);
+            libro->cantidad_items = libro->cantidad_items - retiro;
+            List_Products(libro,3);
+        }
+    }
+    else if(buscar > (libro->id + 1))
+        printf("\n\nEl libro aun no se ha agregado :(\n\n");
+    else if(buscar < (libro->id + 1))
+        printf("\n\nEl libro no existe :()\n\n");
+}

@@ -6,7 +6,7 @@
 #include <windows.h>
 #include "library/Biblioteca.h"
 
-void Roles_menu(_Libros *libros);
+void Roles_menu(struct Libros *libros);
 
 void main()
 {
@@ -16,7 +16,7 @@ void main()
     Roles_menu(libros);
 }
 
-void Roles_menu(_Libros *libros)
+void Roles_menu(struct Libros *libros)
 {
     int option = 0;
     system("cls");
