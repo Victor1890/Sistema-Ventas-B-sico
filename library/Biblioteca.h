@@ -21,12 +21,32 @@ void Roles_menu(struct Libros *libros);
 
 int num = 0;
 
+void Usuario(struct Libros *libros)
+{
+    int matricula;
+    char respuesta;
+
+    system("cls");
+    printf("Escribir su matr%ccula: \t",161); scanf("%d", &matricula);
+    if(matricula == 0)
+    {
+        printf("Favor en escribir su matricula :)");
+        getchar();
+    }
+    else if(matricula != 0)
+    {
+        printf("\n\n%cDeseas ver la lista de los libros disponible%c, (escribir 'Y' para un si o 'N' para un no): \t", 168,63); scanf("%s", &respuesta);
+        if(respuesta == 'y')
+            List_Products(libros,num);
+    }
+}
+
 char AreYouTeacher()
 {
     system("cls");
     char option;
     fflush(stdin);
-    printf("Usted es maestro (escribir Y si es verdadero o N si es falso):\t"); scanf("%s", &option);
+    printf("Usted es bibliotecario (escribir Y si es verdadero o N si es falso):\t"); scanf("%s", &option);
 
     if(option == 'y')
         return option;
@@ -42,8 +62,10 @@ void AgregarLibros()
     int cantidad;
     system("cls");
     printf("\n\nAgregar producto\n\n");
-    printf("Cantidad de producto que deseas agregar?: \t"); scanf("%d", &cantidad);
+    printf("%cCantidad de producto que deseas agregar%c: \t", 168, 63); scanf("%d", &cantidad);
+
     num = cantidad;
+
     libros = (struct Libros *)malloc(cantidad * sizeof(struct Libros *));
 
     fflush(stdin);
@@ -51,9 +73,11 @@ void AgregarLibros()
     for(int i = 0; i < cantidad; i++)
     {
         system("cls");
+
         (libros+i)->id = i;
+
         printf("Agregar el nombre del libro: \t"); scanf("%[^\n]", &(libros+i)->nombre_libros);
-        printf("Agregar la cantidad de libros que 'habra' disponible: \t"); scanf("%d", &(libros+i)->cantidad_items);
+        printf("Agregar la cantidad de libros que 'habr%c' disponible: \t", 160); scanf("%d", &(libros+i)->cantidad_items);
         fflush(stdin);
     }
     fflush(stdin);
@@ -61,28 +85,6 @@ void AgregarLibros()
     printf("Saliendo...\n\n");
     List_Products(libros, num);
     Roles_menu(libros);
-}
-
-void Usuario(struct Libros *libros)
-{
-    int matricula;
-    char respuesta;
-
-    system("cls");
-    printf("Escribir su matricula: \t"); scanf("%d", &matricula);
-    if(matricula == 0)
-    {
-        printf("Favor en escribir su matricula :)");
-        getchar();
-    }
-    else if(matricula != 0)
-    {
-        printf("\n\nDeseas ver la lista de los libros disponible (escribir 'Y' para un si o 'N' para un no): \t"); scanf("%s", &respuesta);
-        printf("\n\nMostrando una lista de %d elementos\n", num);
-        getchar();
-        if(respuesta == 'y')
-            List_Products(libros,num);
-    }
 }
 
 void List_Products(struct Libros *libros, int n)
@@ -102,21 +104,31 @@ void Pedidos(struct Libros *libro)
     char respuesta;
     printf("\n\nQue libro deseas adquirir (seleccionar con el ID):\t"); scanf("%d", &buscar);
 
-    if(buscar == (libro->id + 1))
+    for(int i = 0; i < num; i++)
     {
-        printf("\n\nUsted ha seleccionado '%s' ", libro->nombre_libros);
-        printf("Deseas arquirir el '%s' (escribir 'Y' para un si o 'N' para un no):", libro->nombre_libros); scanf("%s", &respuesta);
-        if(respuesta == 'y')
+        if(buscar == ((libro + i)->id + 1))
         {
-            printf("Cuantos deseas retirar: \t"); scanf("%d", &retiro);
-            libro->cantidad_items = libro->cantidad_items - retiro;
-            printf("\n\nEl %s a sido retirado, precionar ENTER para seguir", libro->nombre_libros);
-            getchar();
-            List_Products(libro,num);
+            printf("\n\nUsted ha seleccionado '%s' \n\n", (libro + i)->nombre_libros);
+            printf("%cDeseas arquirir el '%s'%c (escribir 'Y' para un si o 'N' para un no):",168, (libro + i)->nombre_libros, 63); scanf("%s", &respuesta);
+            if(respuesta == 'y')
+            {
+                printf("%cCuantos deseas retirar%c: \t", 168, 63); scanf("%d", &retiro);
+                (libro + i)->cantidad_items = (libro + i)->cantidad_items - retiro;
+                printf("\n\nEl '%s' a sido retirado, pase un buen d%ca", (libro + i)->nombre_libros, 161);
+                printf("\n\n%cDeseas salir%c (escribir 'Y' para un si o 'N' para un no):\t",168 ,63); scanf("%s", &respuesta);
+                if(respuesta == 'y')
+                    List_Products(libro,num);
+            }
+        }
+        else if(buscar > (libro->id + 1))
+        {
+            printf("\n\nEl libro aun no se ha agregado :(\n\n");
+            system("cls");
+        }
+        else if(buscar < (libro->id + 1))
+        {
+            printf("\n\nEl libro no existe :()\n\n");
+            system("cls");
         }
     }
-    else if(buscar > (libro->id + 1))
-        printf("\n\nEl libro aun no se ha agregado :(\n\n");
-    else if(buscar < (libro->id + 1))
-        printf("\n\nEl libro no existe :()\n\n");
 }

@@ -28,10 +28,13 @@ void Roles_menu(struct Libros *libros)
         case 1:
             Usuario(libros);
             Pedidos(libros);
-            break;
+        break;
         case 2:
+        {
             if(AreYouTeacher() == 'y')
                 AgregarLibros();
+            printf("\n\nUsted no es bibliotecario");
+        }
         break;
         default:
             system("cls");
