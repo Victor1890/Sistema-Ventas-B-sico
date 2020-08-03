@@ -20,7 +20,7 @@ void Roles_menu(struct Libros *libros)
 {
     int option = 0;
     system("cls");
-    printf("\n\n 1-) Estudiante \t 2-) Maestro\n\n");
+    printf("\n\n 1-) Estudiante \t 2-) Bibliotecario\n\n");
     printf("\n\n Elegir una opcion: \t"); scanf("%d", &option);
 
     switch (option)

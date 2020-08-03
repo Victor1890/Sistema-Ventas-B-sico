@@ -51,7 +51,7 @@ void AgregarLibros()
     for(int i = 0; i < cantidad; i++)
     {
         system("cls");
-        libros->id = i;
+        (libros+i)->id = i;
         printf("Agregar el nombre del libro: \t"); scanf("%[^\n]", &(libros+i)->nombre_libros);
         printf("Agregar la cantidad de libros que 'habra' disponible: \t"); scanf("%d", &(libros+i)->cantidad_items);
         fflush(stdin);
@@ -100,7 +100,7 @@ void Pedidos(struct Libros *libro)
 {
     int buscar, retiro;
     char respuesta;
-    printf("\n\nQue libro deseas adquirir:\t"); scanf("%d", &buscar);
+    printf("\n\nQue libro deseas adquirir (seleccionar con el ID):\t"); scanf("%d", &buscar);
 
     if(buscar == (libro->id + 1))
     {
