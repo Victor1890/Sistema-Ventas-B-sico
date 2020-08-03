@@ -27,7 +27,7 @@ void Roles_menu(struct Libros *libros)
     {
         case 1:
             Usuario(libros);
-            //Pedidos(libros);
+            Pedidos(libros);
             break;
         case 2:
             if(AreYouTeacher() == 'y')

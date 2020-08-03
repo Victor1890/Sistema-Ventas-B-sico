@@ -15,7 +15,7 @@ struct Libros
 void AgregarLibros();
 void Usuario(struct Libros *libros);
 char AreYouTeacher();
-//void Pedidos(struct Libros *libro);
+void Pedidos(struct Libros *libro);
 void List_Products(struct Libros *libros, int n);
 void Roles_menu(struct Libros *libros);
 
