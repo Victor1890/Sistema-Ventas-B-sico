@@ -13,11 +13,13 @@ struct Libros
 };
 
 void AgregarLibros();
-void Usuario(struct Libros *libros);
 char AreYouTeacher();
+void Usuario(struct Libros *libros);
 void Pedidos(struct Libros *libro);
 void List_Products(struct Libros *libros, int n);
 void Roles_menu(struct Libros *libros);
+
+int num = 0;
 
 char AreYouTeacher()
 {
@@ -41,7 +43,7 @@ void AgregarLibros()
     system("cls");
     printf("\n\nAgregar producto\n\n");
     printf("Cantidad de producto que deseas agregar?: \t"); scanf("%d", &cantidad);
-
+    num = cantidad;
     libros = (struct Libros *)malloc(cantidad * sizeof(struct Libros *));
 
     fflush(stdin);
@@ -57,7 +59,7 @@ void AgregarLibros()
     fflush(stdin);
     system("cls");
     printf("Saliendo...\n\n");
-    List_Products(libros, cantidad);
+    List_Products(libros, num);
     Roles_menu(libros);
 }
 
@@ -76,10 +78,10 @@ void Usuario(struct Libros *libros)
     else if(matricula != 0)
     {
         printf("\n\nDeseas ver la lista de los libros disponible (escribir 'Y' para un si o 'N' para un no): \t"); scanf("%s", &respuesta);
-        printf("\n\nMostrando una lista de %d elementos\n", 3);
+        printf("\n\nMostrando una lista de %d elementos\n", num);
         getchar();
         if(respuesta == 'y')
-            List_Products(libros,3);
+            List_Products(libros,num);
     }
 }
 
@@ -108,7 +110,9 @@ void Pedidos(struct Libros *libro)
         {
             printf("Cuantos deseas retirar: \t"); scanf("%d", &retiro);
             libro->cantidad_items = libro->cantidad_items - retiro;
-            List_Products(libro,3);
+            printf("\n\nEl %s a sido retirado, precionar ENTER para seguir", libro->nombre_libros);
+            getchar();
+            List_Products(libro,num);
         }
     }
     else if(buscar > (libro->id + 1))
