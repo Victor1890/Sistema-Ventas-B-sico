@@ -13,6 +13,10 @@ void main()
     struct Libros *libros;
     fflush(stdin);
     SetConsoleTitle("Proyecto final de Eimy Corcino - 20186245");
+    printf("Antes de usar este sotfware, primero deber%c ingresar los titulos de los libros al sistema", 160);
+    printf("\nen la opci%cn del bibliotecario y luego as%c podra usar el sistema de biblioteca en la opci%cn de estudiantes",162, 161, 162);
+    printf("\nQue tenga un lindo d%ca :)",161);
+    getchar();
     Roles_menu(libros);
 }
 

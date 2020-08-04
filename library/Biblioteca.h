@@ -8,7 +8,7 @@
 struct Libros
 {
     int id;
-    char nombre_libros[20];
+    char nombre_libros[30];
     int cantidad_items;
 };
 
@@ -72,7 +72,7 @@ void AgregarLibros()
 
     for(int i = 0; i < cantidad; i++)
     {
-        system("cls");
+        //system("cls");
 
         (libros+i)->id = i;
 
@@ -115,9 +115,14 @@ void Pedidos(struct Libros *libro)
                 printf("%cCuantos deseas retirar%c: \t", 168, 63); scanf("%d", &retiro);
                 (libro + i)->cantidad_items = (libro + i)->cantidad_items - retiro;
                 printf("\n\nEl '%s' a sido retirado, pase un buen d%ca", (libro + i)->nombre_libros, 161);
+                List_Products(libro, num);
                 printf("\n\n%cDeseas salir%c (escribir 'Y' para un si o 'N' para un no):\t",168 ,63); scanf("%s", &respuesta);
                 if(respuesta == 'y')
                     List_Products(libro,num);
+                else if(respuesta == 'n')
+                {
+                    List_Products(libro, num);
+                }
             }
         }
         else if(buscar > (libro->id + 1))
